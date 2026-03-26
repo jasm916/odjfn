@@ -1631,15 +1631,6 @@ local Colors = {
     Color3.fromRGB(140,0,255),    -- بنفسجي
     Color3.fromRGB(255,0,140),    -- وردي
 
-    Color3.fromRGB(0, 255, 140),   -- أخضر فاتح
-    Color3.fromRGB(255, 140, 0),   -- برتقالي
-
-    Color3.fromRGB(255, 255, 0),   -- أصفر فاقع
-    Color3.fromRGB(0, 255, 255),   -- تركواز / سماوي
-
-    Color3.fromRGB(140, 255, 0)    -- أخضر ليموني
-    Color3.fromRGB(255, 165, 0)  -- برتقالي لامع
-  
   Color3.fromRGB(0,0,0)         -- أسود
 }
 
