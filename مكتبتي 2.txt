@@ -1553,7 +1553,7 @@ ThemeButton.Parent = MainFrame
 ThemeButton.Size = UDim2.fromOffset(28, 28)
 ThemeButton.Position = UDim2.new(1, -95, 0, -5)
 ThemeButton.BackgroundTransparency = 1
-ThemeButton.Text = "♕"
+ThemeButton.Text = "🇸🇦"
 ThemeButton.TextSize = 20
 ThemeButton.Font = Enum.Font.GothamBold
 ThemeButton.TextColor3 = Color3.fromRGB(255,255,255)
@@ -1661,11 +1661,11 @@ end)
 
 
 
--- زر القلب (يمين فوق)
+-- زر القلب
 local SizeButton = Create("TextButton", MainFrame, {
     Name = "SizeButton",
     Size = UDim2.fromOffset(25, 25),
-    Position = UDim2.new(1, -65, 0, -5),
+    Position = UDim2.new(1, -75, 0, -5),
     BackgroundTransparency = 1,
     Text = "♡",
     TextSize = 18,
@@ -1676,52 +1676,98 @@ local SizeButton = Create("TextButton", MainFrame, {
 
 local TweenService = game:GetService("TweenService")
 
-local liked = false
-local isPulsing = false
+-- 🔊 أصوات
+local Beat1 = Instance.new("Sound")
+Beat1.SoundId = "rbxassetid://9120282207"
+Beat1.Volume = 1
+Beat1.Parent = SizeButton
 
--- دالة النبض
-local function Pulse()
-    if isPulsing then return end
-    isPulsing = true
+local Beat2 = Instance.new("Sound")
+Beat2.SoundId = "rbxassetid://9120282207"
+Beat2.Volume = 0.8
+Beat2.Parent = SizeButton
+
+local PopSound = Instance.new("Sound")
+PopSound.SoundId = "rbxassetid://9118823103"
+PopSound.Volume = 1
+PopSound.Parent = SizeButton
+
+-- ✨ Glow
+local Glow = Instance.new("UIStroke")
+Glow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Glow.Color = Color3.fromRGB(255, 0, 120)
+Glow.Thickness = 2
+Glow.Parent = SizeButton
+Glow.Enabled = false
+
+local liked = false
+local isRunning = false
+
+-- 💓 نبض تيك توك
+local function TikTokPulse()
+    if isRunning then return end
+    isRunning = true
     
     while liked do
-        local grow = TweenService:Create(SizeButton, TweenInfo.new(0.15), {
+        Glow.Enabled = true
+        
+        -- دقة أولى قوية
+        local grow1 = TweenService:Create(SizeButton, TweenInfo.new(0.12), {
+            Size = UDim2.fromOffset(34, 34)
+        })
+        grow1:Play()
+        Beat1:Play()
+        grow1.Completed:Wait()
+        
+        local back1 = TweenService:Create(SizeButton, TweenInfo.new(0.1), {
+            Size = UDim2.fromOffset(28, 28)
+        })
+        back1:Play()
+        back1.Completed:Wait()
+        
+        -- دقة ثانية أخف
+        local grow2 = TweenService:Create(SizeButton, TweenInfo.new(0.12), {
             Size = UDim2.fromOffset(32, 32)
         })
+        grow2:Play()
+        Beat2:Play()
+        grow2.Completed:Wait()
         
-        local shrink = TweenService:Create(SizeButton, TweenInfo.new(0.15), {
+        -- رجوع للوضع الطبيعي
+        local reset = TweenService:Create(SizeButton, TweenInfo.new(0.25), {
             Size = UDim2.fromOffset(25, 25)
         })
+        reset:Play()
+        reset.Completed:Wait()
         
-        grow:Play()
-        grow.Completed:Wait()
-        
-        shrink:Play()
-        shrink.Completed:Wait()
+        task.wait(0.4) -- توقف طبيعي
     end
     
-    isPulsing = false
+    Glow.Enabled = false
+    isRunning = false
 end
 
--- عند الضغط
+-- 👆 عند الضغط
 SizeButton.MouseButton1Click:Connect(function()
     liked = not liked
     
     if liked then
         SizeButton.Text = "♥"
-        
+        PopSound:Play() -- Pop أول ضغطة
         TweenService:Create(SizeButton, TweenInfo.new(0.2), {
-            TextColor3 = Color3.fromRGB(255, 50, 100)
+            TextColor3 = Color3.fromRGB(255, 60, 120)
         }):Play()
         
-        task.spawn(Pulse) -- تشغيل النبض
+        task.spawn(TikTokPulse)
     else
         SizeButton.Text = "♡"
-        
         TweenService:Create(SizeButton, TweenInfo.new(0.2), {
             TextColor3 = Color3.fromRGB(255,255,255),
             Size = UDim2.fromOffset(25, 25)
         }):Play()
+        
+        Beat1:Stop()
+        Beat2:Stop()
     end
 end)
 
