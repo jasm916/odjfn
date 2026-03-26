@@ -1553,7 +1553,7 @@ ThemeButton.Parent = MainFrame
 ThemeButton.Size = UDim2.fromOffset(28, 28)
 ThemeButton.Position = UDim2.new(1, -95, 0, -5)
 ThemeButton.BackgroundTransparency = 1
-ThemeButton.Text = " 🇸🇾 | 🇸🇦 "
+ThemeButton.Text = "👑"
 ThemeButton.TextSize = 20
 ThemeButton.Font = Enum.Font.GothamBold
 ThemeButton.TextColor3 = Color3.fromRGB(255,255,255)
@@ -1628,11 +1628,16 @@ local Colors = {
     Color3.fromRGB(255,0,0),      -- أحمر
     Color3.fromRGB(0,120,255),    -- أزرق
 
-    Color3.fromRGB(140,0,255),    -- بنفسجي
-    Color3.fromRGB(255,0,140),    -- وردي
+    Color3.fromRGB(0, 255, 140),   -- أخضر فاتح
+    Color3.fromRGB(255, 140, 0),   -- برتقالي
 
-  Color3.fromRGB(0,0,0)         -- أسود
-}
+    Color3.fromRGB(255, 255, 0),   -- أصفر فاقع
+    Color3.fromRGB(0, 255, 255),   -- تركواز / سماوي
+
+    Color3.fromRGB(140, 255, 0)    -- أخضر ليموني
+    Color3.fromRGB(255, 165, 0)  -- برتقالي لامع
+  
+})
 
 for i, color in ipairs(Colors) do
     
